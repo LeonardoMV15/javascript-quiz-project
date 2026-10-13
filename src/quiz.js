@@ -35,16 +35,16 @@ hasEnded(){
 }
 
 
-    // 1. constructor (questions, timeLimit, timeRemaining)
+  filterQuestionsByDifficulty(difficulty) {
+  if (typeof difficulty !== "number" || difficulty < 1 || difficulty > 3) {
+    return this.questions;
+  }
 
-    // 2. getQuestion()
-    
-    // 3. moveToNextQuestion()
+  this.questions = this.questions.filter((question) => {
+    return question.difficulty === difficulty;
+  });
 
-    // 4. shuffleQuestions()
-
-    // 5. checkAnswer(answer)
-
-    // 6. hasEnded()
-
+  return this.questions;
 }
+}
+
