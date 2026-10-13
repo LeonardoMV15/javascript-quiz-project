@@ -46,5 +46,12 @@ hasEnded(){
 
   return this.questions;
 }
+averageDifficulty(){
+  const total = this.questions.reduce((acc,question) => {
+    return acc + question.difficulty
+  },0)
+  const avg = total / this.questions.length
+  return avg
+}
 }
 
