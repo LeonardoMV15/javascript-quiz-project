@@ -138,11 +138,14 @@ console.log (quiz)
     choiceElement.type="radio"
     choiceElement.name = "choice"
     choiceElement.value = question.choices[i]
-    choiceElement.innerText = question.choices[i]
-    // const choice =   `<input type="radio" name="choice" value= ${question.choices[i]}> ` 
+     const label = document.createElement("label");
+label.innerText = question.choices[i];
+
     const li = document.createElement("li");
 li.appendChild(choiceElement) ;
-      choiceContainer.appendChild(li);
+li.appendChild(label);
+ choiceContainer.appendChild(li);
+
 
   }
 
