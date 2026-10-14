@@ -133,6 +133,19 @@ console.log (quiz)
       // Hint 3: You can use the `element.appendChild()` method to append an element to the choices container.
       // Hint 4: You can use the `element.innerText` property to set the inner text of an element.
 
+  for (let i = 0; i < question.choices.length; i++) {
+    const choiceElement = document.createElement("input")
+    choiceElement.type="radio"
+    choiceElement.name = "choice"
+    choiceElement.value = question.choices[i]
+    choiceElement.innerText = question.choices[i]
+    // const choice =   `<input type="radio" name="choice" value= ${question.choices[i]}> ` 
+    const li = document.createElement("li");
+li.appendChild(choiceElement) ;
+      choiceContainer.appendChild(li);
+
+  }
+
   }
 
 
