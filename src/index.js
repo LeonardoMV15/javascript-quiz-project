@@ -42,7 +42,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Shuffle the quiz questions
   quiz.shuffleQuestions();
 
-
+console.log (quiz)
   /************  SHOW INITIAL CONTENT  ************/
 
   // Convert the time remaining in seconds to minutes and seconds, and pad the numbers with zeros if needed
@@ -95,6 +95,8 @@ document.addEventListener("DOMContentLoaded", () => {
     
 
     // YOUR CODE HERE:
+  
+  questionContainer.innerText = question.text;
     //
     // 1. Show the question
     // Update the inner text of the question container element and show the question text
@@ -103,14 +105,17 @@ document.addEventListener("DOMContentLoaded", () => {
     // 2. Update the green progress bar
     // Update the green progress bar (div#progressBar) width so that it shows the percentage of questions answered
     
-    progressBar.style.width = `65%`; // This value is hardcoded as a placeholder
+    const progessBar = (quiz.currentQuestionIndex /quiz.questions.length) * 100
+    progressBar.style.width = progessBar;
+    console.log (progressBar)
 
+    
 
 
     // 3. Update the question count text 
     // Update the question count (div#questionCount) show the current question out of total questions
     
-    questionCount.innerText = `Question 1 of 10`; //  This value is hardcoded as a placeholder
+    questionCount.innerText = `Question 1 of 4`; //  This value is hardcoded as a placeholder
 
 
     
