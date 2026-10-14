@@ -105,8 +105,8 @@ console.log (quiz)
     // 2. Update the green progress bar
     // Update the green progress bar (div#progressBar) width so that it shows the percentage of questions answered
     
-    const progessBar = (quiz.currentQuestionIndex /quiz.questions.length) * 100
-    progressBar.style.width = progessBar;
+    const progress = (quiz.currentQuestionIndex +1 / quiz.questions.length) * 100;
+    progressBar.style.width = `${progress}%`
     console.log (progressBar)
 
     
