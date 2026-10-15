@@ -202,4 +202,20 @@ li.appendChild(label);
     resultContainer.innerText = `You scored ${quiz.correctAnswers} out of ${quiz.questions.length} correct answers!`; // This value is hardcoded as a placeholder
   }
   
+const restartButton = document.querySelector("#restartButton");
+function restartQuiz (){
+ 
+    quizView.style.display = "block";
+     endView.style.display = "none";
+      quiz.currentQuestionIndex = 0;
+  quiz.correctAnswers = 0;
+  showQuestion();
+}
+
+
+  restartButton.addEventListener("click", restartQuiz);
+
+
+  
+
 });
