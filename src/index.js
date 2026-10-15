@@ -45,13 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
 console.log (quiz)
   /************  SHOW INITIAL CONTENT  ************/
 
-  // Convert the time remaining in seconds to minutes and seconds, and pad the numbers with zeros if needed
-  const minutes = Math.floor(quiz.timeRemaining / 60).toString().padStart(2, "0");
-  const seconds = (quiz.timeRemaining % 60).toString().padStart(2, "0");
-
-  // Display the time remaining in the time remaining container
-  const timeRemainingContainer = document.getElementById("timeRemaining");
-  timeRemainingContainer.innerText = `${minutes}:${seconds}`;
+  const timeRemainingContainer = document.querySelector("#timeRemaining span");
 
   // Show first question
   showQuestion();
@@ -60,6 +54,29 @@ console.log (quiz)
   /************  TIMER  ************/
 
   let timer;
+
+  function updateTimerDisplay() {
+    const minutes = Math.floor(quiz.timeRemaining / 60).toString().padStart(2, "0");
+    const seconds = (quiz.timeRemaining % 60).toString().padStart(2, "0");
+    timeRemainingContainer.innerText = `${minutes}:${seconds}`;
+  }
+
+  function startTimer() {
+    clearInterval(timer);
+    updateTimerDisplay();
+
+    timer = setInterval(() => {
+      quiz.timeRemaining--;
+      updateTimerDisplay();
+
+      if (quiz.timeRemaining <= 0) {
+        clearInterval(timer);
+        showResults();
+      }
+    }, 1000);
+  }
+
+  startTimer();
 
 
   /************  EVENT LISTENERS  ************/
@@ -189,6 +206,7 @@ li.appendChild(label);
 
 
   function showResults() {
+    clearInterval(timer);
 
     // YOUR CODE HERE:
     //
@@ -204,12 +222,15 @@ li.appendChild(label);
   
 const restartButton = document.querySelector("#restartButton");
 function restartQuiz (){
- 
+    clearInterval(timer);
+    quiz.timeRemaining = quiz.timeLimit;
+    quiz.currentQuestionIndex = 0;
+    quiz.correctAnswers = 0;
+
     quizView.style.display = "block";
-     endView.style.display = "none";
-      quiz.currentQuestionIndex = 0;
-  quiz.correctAnswers = 0;
-  showQuestion();
+    endView.style.display = "none";
+    showQuestion();
+    startTimer();
 }
 
 
