@@ -105,7 +105,7 @@ console.log (quiz)
     // 2. Update the green progress bar
     // Update the green progress bar (div#progressBar) width so that it shows the percentage of questions answered
     
-    const progress = (quiz.currentQuestionIndex +1 / quiz.questions.length) * 100;
+    const progress = (quiz.currentQuestionIndex  / quiz.questions.length) * 100;
     progressBar.style.width = `${progress}%`
     console.log (progressBar)
 
@@ -115,7 +115,7 @@ console.log (quiz)
     // 3. Update the question count text 
     // Update the question count (div#questionCount) show the current question out of total questions
     
-    questionCount.innerText = `Question 1 of ${quiz.questions.length}`; //  This value is hardcoded as a placeholder
+    questionCount.innerText = `Question ${quiz.currentQuestionIndex +1} of ${quiz.questions.length}`; //  This value is hardcoded as a placeholder
 
 
     
@@ -152,15 +152,7 @@ li.appendChild(label);
   }
 
 
-  
-  function nextButtonHandler () {
-    let selectedAnswer; // A variable to store the selected answer value
-
-
-
-    // YOUR CODE HERE:
-    //
-    // 1. Get all the choice elements. You can use the `document.querySelectorAll()` method.
+  // 1. Get all the choice elements. You can use the `document.querySelectorAll()` method.
 
 
     // 2. Loop through all the choice elements and check which one is selected
@@ -173,6 +165,24 @@ li.appendChild(label);
       // Check if selected answer is correct by calling the quiz method `checkAnswer()` with the selected answer.
       // Move to the next question by calling the quiz method `moveToNextQuestion()`.
       // Show the next question by calling the function `showQuestion()`.
+
+  function nextButtonHandler () {
+    let selectedAnswer;
+    const allAnswers = document.querySelectorAll(
+      '#choices input[name="choice"]'
+    );
+
+    allAnswers.forEach((answer) => {
+      if (answer.checked) {
+        selectedAnswer = answer.value;
+      }
+    });
+
+    if (selectedAnswer !== undefined) {
+      quiz.checkAnswer(selectedAnswer);
+      quiz.moveToNextQuestion();
+      showQuestion();
+    }
   }  
 
 
@@ -189,7 +199,7 @@ li.appendChild(label);
     endView.style.display = "flex";
     
     // 3. Update the result container (div#result) inner text to show the number of correct answers out of total questions
-    resultContainer.innerText = `You scored 1 out of 1 correct answers!`; // This value is hardcoded as a placeholder
+    resultContainer.innerText = `You scored ${quiz.correctAnswers} out of ${quiz.questions.length} correct answers!`; // This value is hardcoded as a placeholder
   }
   
 });
